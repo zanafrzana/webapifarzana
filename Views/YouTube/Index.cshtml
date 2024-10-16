@@ -1,0 +1,149 @@
+﻿@model List<YoutubeApiProject1.Models.YouTubeVideoModel>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search YouTube Videos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #ffffff; /* Light background color */
+        }
+
+        h2 {
+            color: purple; /* Change heading color to purple */
+            text-align: center; /* Center the heading */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Glow effect */
+        }
+
+        form {
+            margin-bottom: 20px;
+            text-align: center; /* Center the form */
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: purple; /* Change button to purple */
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s; /* Smooth transition for background color */
+        }
+
+            button:hover {
+                background-color: #9932CC; /* Slightly darker purple on hover */
+            }
+
+        .video-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center; /* Center video cards */
+        }
+
+        .video-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            width: 300px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+            .video-card:hover {
+                transform: scale(1.05);
+            }
+
+            .video-card img {
+                max-width: 100%;
+                height: auto;
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            .video-card h3 {
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
+
+            .video-card p {
+                font-size: 14px;
+                color: #666;
+            }
+
+        .playlist {
+            margin-top: 40px; /* Space above the playlist section */
+            text-align: center; /* Center the playlist heading */
+        }
+
+            .playlist video {
+                margin: 10px 0; /* Space between videos */
+                width: 300px; /* Fixed width for videos */
+            }
+    </style>
+</head>
+<body>
+    <h2>Search YouTube Videos</h2> <!-- Heading now purple -->
+    <form asp-action="Search" method="post">
+        <input type="text" name="query" placeholder="Search for videos..." />
+        <button type="submit">Search</button>
+    </form>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="video-container">
+            @foreach (var video in Model)
+            {
+                <div class="video-card">
+                    <h3>@video.Title</h3>
+                    <img src="@video.ThumbnailUrl" alt="@video.Title" />
+                    <p>@video.Description</p>
+                    <br />
+                    <a href="@video.VideoUrl" target="_blank">
+                        <button type="button">Watch</button> <!-- Button is now purple -->
+                    </a>
+                </div>
+            }
+        </div>
+    }
+
+    <!-- Video Playlist Section -->
+    <div class="playlist">
+        <h3>Your Video Playlist</h3>
+        <video controls>
+            <source src="video/video1.mp4" type="video/mp4"> <!-- Replace with your video file name -->
+            Your browser does not support the video tag.
+        </video>
+        <video controls>
+            <source src="video/video2.mp4" type="video/mp4"> <!-- Replace with your video file name -->
+            Your browser does not support the video tag.
+        </video>
+        <video controls>
+            <source src="video/video3.mp4" type="video/mp4"> <!-- Replace with your video file name -->
+            Your browser does not support the video tag.
+        </video>
+        <video controls>
+            <source src="video/video4.mp4" type="video/mp4"> <!-- Replace with your video file name -->
+            Your browser does not support the video tag.
+        </video>
+        <video controls>
+            <source src="video/video5.mp4" type="video/mp4"> <!-- Replace with your video file name -->
+            Your browser does not support the video tag.
+        </video>
+        <video controls>
+            <source src="video/video6.mp4" type="video/mp4"> <!-- Replace with your video file name -->
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</body>
+</html>
